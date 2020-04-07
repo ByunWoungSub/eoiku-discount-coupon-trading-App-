@@ -37,7 +37,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    
+
     'eoiku',
     'rest_framework',
     'corsheaders'
@@ -141,3 +141,6 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.0/howto/static-files/
 
 STATIC_URL = '/static/'
+
+MEDIA_URL = '/res'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'coupon')
