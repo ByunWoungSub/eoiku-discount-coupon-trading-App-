@@ -19,11 +19,18 @@ class User_info(models.Model):
 
 
 
+class Coupon(models.Model):
+    image = models.ImageField(upload_to='%Y/%m/%d')
+    category = models.CharField(max_length=10)
+    period = models.DateField()
+    price = models.IntegerField(default=0)
+
+
 class Post(models.Model):
     title = models.CharField(max_length=100)
-    author = models.ForeignKey(User_info,on_delete=models.CASCADE,related_name='name')
+    author = models.ForeignKey(User_info,on_delete=models.CASCADE)
     content = models.TextField()
-    coupon = models.ImageField(upload_to = '{title}')
+    coupon = models.ForeignKey(Coupon,on_delete=models.CASCADE)
     created = models.DateTimeField(auto_now_add=True)
     state = models.BooleanField()
 
@@ -32,3 +39,5 @@ class Post(models.Model):
     
     class Meta:
         ordering = ['created']
+
+
