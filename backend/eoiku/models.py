@@ -27,7 +27,7 @@ class Post(models.Model):
     title = models.CharField(max_length=100)
     author = models.ForeignKey(User_info,on_delete=models.CASCADE)
     content = models.TextField()
-    coupon = models.ForeignKey(Coupon,on_delete=models.CASCADE)
+    coupon = models.ForeignKey(Coupon,on_delete=models.SET_NULL,null=True)
     created = models.DateTimeField(auto_now_add=True)
     state = models.BooleanField()
 

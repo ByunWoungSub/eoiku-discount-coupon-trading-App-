@@ -8,3 +8,11 @@ from .serializers import *
 class PostViewSet(viewsets.ModelViewSet):
     queryset = Post.objects.all()
     serializer_class = PostSerializer
+
+class UserViewSet(viewsets.ModelViewSet):
+    queryset = User_info.objects.all()
+    serializer_class = PostSerializer
+
+class CouponPostViewSet(viewsets.ModelViewSet):
+    queryset = Coupon.objects.all()
+    serializer_class = PostSerializer

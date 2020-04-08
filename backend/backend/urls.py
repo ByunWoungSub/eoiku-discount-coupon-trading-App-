@@ -18,5 +18,5 @@ from django.urls import path,include
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('post/',include('eoiku.urls')),
+    path('api/',include('eoiku.urls')),
 ]
