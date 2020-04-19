@@ -13,44 +13,44 @@ GET /post
 ```
 - Response
 ```
-
+{
+    Post.Objects.all()
+}
 ```
 ```
 
 
 ```
-로그인
+게시글 작성
 -
 ```
-POST /account/sign-in
+POST /post
 ```
  - Request
 ```
 {
-    id: String,
-    pw: String,
+    title: String,
+    author: User.id,
+    created: DateTime,
+    content: Text,
+    image: Image,
+    category: String,
+    period: Date,
+    price: Int,
+    state: Boolean
 }
 ```
 - Response
 ```
-SUCCESS {
-     id: String,
-     pw: String,
-     nickname: String,
-     email: String,
-     phonenum: String,
-     token: String,
-    },status=200
+
 ```
 ```
-FAIL {"message":"FAIL"},status=400
-FAIL {"message":"FAIL"},status=401
-FAIL {"message":"FAIL"},status=404
+
 ```
-로그아웃
+게시글 세부 조회
 -
 ```
-POST/logout
+GET /post/{Post.id}/
 ```
  - Request
 ```
@@ -59,8 +59,17 @@ POST/logout
 ```
 - Response
 ```
-
-
+{
+    title: String,
+    author: User.id,
+    created: DateTime,
+    content: Text,
+    image: Image,
+    category: String,
+    period: Date,
+    price: Int,
+    state: Boolean
+}
 ```
 ```
 
