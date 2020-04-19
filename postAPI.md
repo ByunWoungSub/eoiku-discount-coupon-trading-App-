@@ -60,6 +60,7 @@ GET /post/{Post.id}/
 - Response
 ```
 {
+    id: Int,
     title: String,
     author: User.id,
     created: DateTime,
@@ -70,6 +71,56 @@ GET /post/{Post.id}/
     price: Int,
     state: Boolean
 }
+```
+```
+
+
+```
+
+게시글 수정
+-
+```
+PUT /post/{Post.id}
+```
+- Request
+```
+{
+    title: String,
+    author: User.id,
+    created: DateTime,
+    content: Text,
+    image: Image,
+    category: String,
+    period: Date,
+    price: Int,
+    state: Boolean
+}
+```
+- Response
+```
+
+
+```
+```
+
+
+```
+
+게시글 삭제
+-
+```
+DELETE /post/{Post.id}
+```
+- Request
+```
+{
+    
+}
+```
+- Response
+```
+
+
 ```
 ```
 
