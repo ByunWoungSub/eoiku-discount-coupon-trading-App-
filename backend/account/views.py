@@ -21,15 +21,15 @@ class SignUpView(View):
             if User.objects.filter(id=data['id']).exists():
                 return JsonResponse({'message':'User is already exists'},status=401)
             
-            # pw=data['pw'].encode('utf-8')
-            # pw_crypt = bcrypt.hashpw(pw,bcrypt.gensalt())
-            # pw_crypt = pw_crypt.decode('utf-8')
+            pw=data['pw'].encode('utf-8')
+            pw_crypt = bcrypt.hashpw(pw,bcrypt.gensalt())
+            pw_crypt = pw_crypt.decode('utf-8')
 
             
             User(
                 id = data['id'],
                 nickname = data['nickname'],
-                pw = data['pw'],
+                pw = pw_crypt,
                 email = data['email'],
                 phonenum = data['phonenum']
 
@@ -48,24 +48,27 @@ class SignInView(View):
         try:
             if User.objects.filter(id=data['id']).exists():
                 user = User.objects.get(id=data['id'])
-                # if bcrypt.checkpw(data['pw'].encode('utf-8'),user.pw.encode('utf-8')):
-                if data['pw'] == user.pw:
-                    token = jwt.encode({'id':data['id']},SECRET_KEY,algorithm="HS256")
-                    token = token.decode('utf-8')
-                    return JsonResponse({
-                        'id':user.id,
-                        'pw':user.pw,
-                        'nickname':user.nickname,
-                        'email':user.email,
-                        'phonenum':user.phonenum,
-                        'token': token},status=200)
-                else :
-                    return JsonResponse({'message':'FAIL'},status=401)
+                print(data['pw'].encode('utf-8'))
+                print(user.pw.encode('utf-8'))
+                print(bcrypt.checkpw(data['pw'].encode('utf-8'),user.pw.encode('utf-8')))
+                if bcrypt.checkpw(data['pw'].encode('utf-8'),user.pw.encode('utf-8')):
+                    if data['pw'] == user.pw:
+                        token = jwt.encode({'id':data['id']},SECRET_KEY,algorithm="HS256")
+                        token = token.decode('utf-8')
+                        return JsonResponse({
+                            'id':user.id,
+                            'pw':user.pw,
+                            'nickname':user.nickname,
+                            'email':user.email,
+                            'phonenum':user.phonenum,
+                            'token': token},status=200)
+                    else :
+                        return JsonResponse({'message':'FAIL1'},status=401)
 
-            return JsonResponse({'message':'FAIL'},status=400)
+                return JsonResponse({'message':'FAIL2'},status=400)
 
         except KeyError:
-            return JsonResponse({'message':'FAIL'},status=404)
+            return JsonResponse({'message':'FAIL3'},status=404)
 
 
 
